@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Urban Care</string>
+    <string name="nomeUser" translatable="false">Nome Utilizador</string>
+    <string name="notas" translatable="false">Ver Notas</string>
+</resources>

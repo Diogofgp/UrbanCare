@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Urban Care</string>
+    <string name="nomeUser" translatable="false">Username</string>
+    <string name="notas" translatable="false">Check Notes</string>
+</resources>
