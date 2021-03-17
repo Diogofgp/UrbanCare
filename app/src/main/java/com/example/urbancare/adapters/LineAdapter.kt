@@ -1,4 +1,4 @@
-package com.example.urbancare.adapter
+package com.example.urbancare.adapters
 
 import android.view.LayoutInflater
 import android.view.View

@@ -2,10 +2,9 @@ package com.example.urbancare
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.urbancare.adapter.LineAdapter
+import com.example.urbancare.adapters.LineAdapter
 import com.example.urbancare.dataclasses.NotasData
 
 class NotasActivity : AppCompatActivity() {
