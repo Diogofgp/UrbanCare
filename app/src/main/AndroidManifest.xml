@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UrbanCare">
         <activity android:name=".NotasActivity"></activity>
+        <activity android:name=".AdicionarNota"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

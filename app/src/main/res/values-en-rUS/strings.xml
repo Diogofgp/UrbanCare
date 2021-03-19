@@ -3,4 +3,5 @@
     <string name="app_name">Urban Care</string>
     <string name="nomeUser" translatable="false">Username</string>
     <string name="notas" translatable="false">Check Notes</string>
+    <string name="empty_not_saved" translatable="false">Note is empty: not inserted</string>
 </resources>

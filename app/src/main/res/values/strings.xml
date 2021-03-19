@@ -2,4 +2,7 @@
     <string name="app_name">Urban Care</string>
     <string name="nomeUser" translatable="false">Nome Utilizador</string>
     <string name="notas" translatable="false">Ver Notas</string>
+    <string name="empty_not_saved" translatable="false">Nota vazia: não inserida</string>
+    <string name="insert_titulo" translatable="false">Insira o titulo</string>
+    <string name="insert_descricao" translatable="false">Insira a descricao</string>
 </resources>

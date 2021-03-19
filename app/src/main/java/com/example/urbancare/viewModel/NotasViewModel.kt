@@ -27,4 +27,11 @@ class NotasViewModel(application: Application): AndroidViewModel(application){
         repositorio.insert(nota)
     }
 
+    // delete all
+
+    /*
+    fun deleteAll(nota: Nota) = viewModelScope.launch(Dispatchers.IO) {
+        repositorio.deleteAll()
+    }*/
+
 }

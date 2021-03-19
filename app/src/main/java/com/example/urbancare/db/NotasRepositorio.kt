@@ -12,4 +12,9 @@ class NotasRepositorio(private val notasDao: NotasDao){
         notasDao.insert(nota)
     }
 
+    /*
+    suspend fun deleteAll(){
+        notasDao.deleteAll()
+    }*/
+
 }

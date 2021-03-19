@@ -6,25 +6,45 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.urbancare.dao.NotasDao
 import com.example.urbancare.entities.Nota
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(Nota::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(Nota::class), version = 8, exportSchema = false)
 public abstract class NotasDB: RoomDatabase(){
 
 
     abstract fun NotasDao(): NotasDao
 
+    private class NotasDatabaseCallback(
+            private val scope: CoroutineScope) : RoomDatabase.Callback() {
+
+
+        override fun onOpen(db: SupportSQLiteDatabase) {
+            super.onOpen(db)
+            INSTANCE?.let { database ->
+                scope.launch{
+                    //var notaDao = database.NotasDao()
+
+                    //apagar conteudo, query nao feita
+                    //notaDao.deleteAll()
+
+                    //adicionar mock data
+                    //var nota = Nota(1, "caralho", "o tamanho da titulo")
+                    //notaDao.insert(nota)
+
+                }
+            }
+        }
+    }
+
     companion object {
-
-
         @Volatile
         private var INSTANCE: NotasDB? = null
 
         fun getDatabase(context: Context, scope: CoroutineScope): NotasDB {
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
 
             val tempInstance = INSTANCE
             if(tempInstance != null){
@@ -36,8 +56,9 @@ public abstract class NotasDB: RoomDatabase(){
                     context.applicationContext,
                     NotasDB::class.java,
                     "notas_database"
-                )
-                    .build()
+                )//.fallbackToDestructiveMigration()
+                        .addCallback(NotasDatabaseCallback(scope))
+                        .build()
                 INSTANCE = instance
                 return instance
             }
