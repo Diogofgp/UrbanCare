@@ -6,22 +6,32 @@
     android:orientation="vertical">
 
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/insert_titulo" />
+
     <EditText
         android:id="@+id/adicionar_titulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/insert_titulo"/>
+        android:layout_marginBottom="20dp"/>
 
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/insert_descricao" />
 
     <EditText
         android:id="@+id/adicionar_descricao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/insert_descricao"/>
+        android:layout_marginBottom="20dp"/>
 
     <Button
         android:id="@+id/button_adicionar_nota"

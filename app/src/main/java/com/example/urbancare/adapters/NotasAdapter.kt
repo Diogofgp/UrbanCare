@@ -15,8 +15,10 @@ class NotasAdapter internal constructor(context: Context):
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var notas = emptyList<Nota>()
 
+
     class NotasViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val notaItemView: TextView = itemView.findViewById(R.id.titulo)
+        val descricaoItemView: TextView = itemView.findViewById(R.id.descricao)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotasViewHolder {
@@ -28,7 +30,9 @@ class NotasAdapter internal constructor(context: Context):
     override fun onBindViewHolder(holder: NotasViewHolder, position: Int) {
         val posicao = notas[position]
 
-        holder.notaItemView.text = posicao.id.toString() + "-" + posicao.titulo + "-" + posicao.descricao
+        //holder.notaItemView.text = posicao.id.toString() + "-" + posicao.titulo + "-" + posicao.descricao
+        holder.notaItemView.text = posicao.id.toString() + "--" +  posicao.titulo
+        holder.descricaoItemView.text = posicao.descricao
     }
 
     internal fun setNotas(notas: List<Nota>){
@@ -37,6 +41,7 @@ class NotasAdapter internal constructor(context: Context):
     }
 
     override fun getItemCount() = notas.size
+
 
 }
 

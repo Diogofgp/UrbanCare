@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.urbancare.adapters.NotasAdapter
@@ -47,6 +48,7 @@ class NotasActivity : AppCompatActivity() {
             val intent = Intent(this@NotasActivity, AdicionarNota::class.java)
             startActivityForResult(intent, newNotaActivityRequestCode)
         }
+
 
     }
 
