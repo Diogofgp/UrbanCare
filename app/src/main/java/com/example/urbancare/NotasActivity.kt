@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Observer
@@ -12,7 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.urbancare.adapters.DESCRIPTION
 import com.example.urbancare.adapters.NotasAdapter
+import com.example.urbancare.adapters.TITLE
 import com.example.urbancare.entities.Nota
 import com.example.urbancare.viewModel.NotasViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -49,7 +52,6 @@ class NotasActivity : AppCompatActivity() {
             startActivityForResult(intent, newNotaActivityRequestCode)
         }
 
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -71,6 +73,14 @@ class NotasActivity : AppCompatActivity() {
                     R.string.empty_not_saved,
                     Toast.LENGTH_LONG).show()
         }
+    }
+
+
+    fun verNota(view: View) {
+        val intent = Intent(this, VerNota::class.java).apply {}
+        startActivity(intent)
+
+
     }
 
 

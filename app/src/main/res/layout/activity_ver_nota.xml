@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textoTitle"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:text="Titulo" />
+
+    <EditText
+        android:id="@+id/editar_titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:id="@+id/textoDescricao"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Descricao" />
+
+    <EditText
+        android:id="@+id/editar_descricao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/edit_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Editar" />
+
+    <Button
+        android:id="@+id/go_back_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="voltar"
+        android:text="Voltar Atrás" />
+</LinearLayout>

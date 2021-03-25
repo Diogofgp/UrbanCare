@@ -7,7 +7,6 @@ import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_adicionar_nota.*
 
 class AdicionarNota : AppCompatActivity() {
 
@@ -23,7 +22,6 @@ class AdicionarNota : AppCompatActivity() {
 
         val button = findViewById<Button>(R.id.button_adicionar_nota)
 
-        //prob errado
 
         button.setOnClickListener {
             val replyIntent = Intent()

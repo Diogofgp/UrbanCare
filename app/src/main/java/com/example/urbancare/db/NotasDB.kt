@@ -26,14 +26,6 @@ public abstract class NotasDB: RoomDatabase(){
             super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch{
-                    //var notaDao = database.NotasDao()
-
-                    //apagar conteudo, query nao feita
-                    //notaDao.deleteAll()
-
-                    //adicionar mock data
-                    //var nota = Nota(1, "caralho", "o tamanho da titulo")
-                    //notaDao.insert(nota)
 
                 }
             }

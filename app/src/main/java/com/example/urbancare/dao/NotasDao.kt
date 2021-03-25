@@ -1,10 +1,7 @@
 package com.example.urbancare.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.urbancare.entities.Nota
 
 @Dao
@@ -16,7 +13,12 @@ interface NotasDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(nota: Nota)
 
+    @Update
+    suspend fun updateNota(nota: Nota)
+
     /*
-    @Query("DELETE FROM notas_table")
-    suspend fun deleteAll()*/
+    @Delete
+    suspend fun deleteNota(nota: Nota)*/
+
+
 }

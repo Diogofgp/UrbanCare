@@ -5,4 +5,6 @@
     <string name="empty_not_saved" translatable="false">Nota vazia: não inserida</string>
     <string name="insert_titulo" translatable="false">Insira o titulo</string>
     <string name="insert_descricao" translatable="false">Insira a descricao</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
