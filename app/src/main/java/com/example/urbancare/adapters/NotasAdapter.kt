@@ -15,6 +15,7 @@ import com.example.urbancare.NotasActivity
 import com.example.urbancare.R
 import com.example.urbancare.VerNota
 import com.example.urbancare.entities.Nota
+import com.example.urbancare.viewModel.NotasViewModel
 import kotlinx.android.synthetic.main.recycler_line.view.*
 
 const val TITLE = "title"
@@ -63,6 +64,10 @@ class NotasAdapter internal constructor(context: Context):
             }
             context.startActivity(intent)
         }
+
+    }
+
+    fun deleteNota(holder: NotasViewHolder, position: Int){
 
     }
 

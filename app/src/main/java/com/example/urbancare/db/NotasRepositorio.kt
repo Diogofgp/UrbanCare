@@ -16,10 +16,9 @@ class NotasRepositorio(private val notasDao: NotasDao){
         notasDao.updateNota(nota)
     }
 
+    suspend fun deleteNota(id: Int?){
+        notasDao.deleteNota(id)
+    }
 
-    /*
-    suspend fun deleteNota(nota: Nota){
-        NotasDao.de
-    }*/
 
 }

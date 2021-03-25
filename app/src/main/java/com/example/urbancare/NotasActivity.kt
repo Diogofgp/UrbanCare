@@ -79,9 +79,9 @@ class NotasActivity : AppCompatActivity() {
     fun verNota(view: View) {
         val intent = Intent(this, VerNota::class.java).apply {}
         startActivity(intent)
-
-
     }
+
+
 
 
 }

@@ -1,17 +1,17 @@
 package com.example.urbancare
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,8 +37,6 @@ class VerNota : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ver_nota)
 
-        //editarTituloText = findViewById(R.id.editar_titulo)
-        //editarDescricaoText = findViewById(R.id.editar_descricao)
 
         notasViewModel = ViewModelProvider(this).get(NotasViewModel::class.java)
 
@@ -60,56 +58,18 @@ class VerNota : AppCompatActivity() {
 
             notasViewModel.updateNota(nota)
             startActivity(intent)
+            Toast.makeText(this, id_nota.toString(), Toast.LENGTH_SHORT).show()
 
         }
 
-        //findViewById<EditText>(R.id.editar_titulo).setText(getTitle)
-        //findViewById<EditText>(R.id.editar_descricao).setText(getDescription)
+        val btnDelete = findViewById<Button>(R.id.delete_button)
 
-
-
-        /*
-        edit_button.setOnClickListener {
-            val replyIntent = Intent()
-
-
-            if (TextUtils.isEmpty(editarTituloText.text)) {
-                setResult(Activity.RESULT_CANCELED, replyIntent)
-            } else {
-                replyIntent.putExtra(EXTRA_REPLY_TITULO, editarTituloText.text.toString())
-                replyIntent.putExtra(EXTRA_REPLY_DESCRICAO, editarDescricaoText.text.toString())
-                setResult(Activity.RESULT_OK, replyIntent)
-            }
-            finish()
-        }*/
-
+        btnDelete.setOnClickListener {
+            notasViewModel.deleteNota(id_nota)
+        }
     }
 
 
-    /*
-    fun editarNota(view: View){
-
-
-        editarTituloText = findViewById(R.id.editar_titulo)
-        editarDescricaoText = findViewById(R.id.editar_descricao)
-
-        var id_nota = intent.getIntExtra(ID, 0)
-        val replyIntent = Intent()
-
-        if (TextUtils.isEmpty(editarTituloText.text)) {
-            setResult(Activity.RESULT_CANCELED, replyIntent)
-        } else {
-
-
-            val nota = Nota(id= id_nota, titulo = editarTituloText.text.toString(), descricao = editarDescricaoText.text.toString())
-
-            notasViewModel.updateNota(nota)
-            setResult(Activity.RESULT_OK, replyIntent)
-
-            finish()
-        }
-
-    }*/
 
     fun voltar(view: View) {
 

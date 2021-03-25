@@ -32,11 +32,8 @@ class NotasViewModel(application: Application): AndroidViewModel(application){
         repositorio.updateNota(nota)
     }
 
-    // delete all
-
-    /*
-    fun deleteAll(nota: Nota) = viewModelScope.launch(Dispatchers.IO) {
-        repositorio.deleteAll()
-    }*/
+    fun deleteNota(id: Int?) = viewModelScope.launch(Dispatchers.IO){
+        repositorio.deleteNota(id)
+    }
 
 }
