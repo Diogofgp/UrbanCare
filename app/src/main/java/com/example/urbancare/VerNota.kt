@@ -53,29 +53,37 @@ class VerNota : AppCompatActivity() {
         btn.setOnClickListener {
             //go back to previous activity
             val intent = Intent(this, NotasActivity::class.java)
-
+            val replyIntent = Intent()
             val nota = Nota(id_nota, getTitle.text.toString(), getDescription.text.toString())
 
-            notasViewModel.updateNota(nota)
-            startActivity(intent)
-            Toast.makeText(this, id_nota.toString(), Toast.LENGTH_SHORT).show()
+            if (TextUtils.isEmpty(getTitle.text) || TextUtils.isEmpty(getDescription.text)) {
+                setResult(Activity.RESULT_CANCELED, replyIntent)
+                Toast.makeText(this, R.string.toast_preencher_campos, Toast.LENGTH_LONG).show()
+
+            } else {
+                notasViewModel.updateNota(nota)
+                startActivity(intent)
+            }
 
         }
 
         val btnDelete = findViewById<Button>(R.id.delete_button)
 
         btnDelete.setOnClickListener {
-            notasViewModel.deleteNota(id_nota)
+            val intent = Intent(this, NotasActivity::class.java)
+            val builder = AlertDialog.Builder(this)
+
+            builder.setPositiveButton("Yes"){ _, _ ->
+                notasViewModel.deleteNota(id_nota)
+                startActivity(intent)
+                Toast.makeText(this, R.string.de_certeza, Toast.LENGTH_LONG).show()
+            }
+            builder.setNegativeButton("No"){ _, _ ->}
+            builder.setTitle("Delete note with the title: '${getTitle.text}'")
+            builder.setMessage(R.string.de_certeza)
+            builder.create().show()
+
         }
     }
-
-
-
-    fun voltar(view: View) {
-
-        val intent = Intent(this, NotasActivity::class.java)
-        startActivity(intent)
-    }
-
 
 }

@@ -8,35 +8,58 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/insert_titulo" />
+        android:layout_width="350dp"
+        android:layout_height="34dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/manrope_bold"
+        android:text="@string/insert_titulo"
+        android:textColor="@color/ColorLightBlack"
+        android:textColorHighlight="@color/header"
+        android:textColorLink="@color/header"
+        android:textSize="@dimen/_18ssp" />
 
     <EditText
         android:id="@+id/adicionar_titulo"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/ColorLightBlack"
+        android:textColorHighlight="@color/header"
+        android:textColorLink="@color/header" />
 
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="34dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/manrope_bold"
+        android:textColor="@color/ColorLightBlack"
+        android:textColorHighlight="@color/header"
+        android:textColorLink="@color/header"
+        android:textSize="@dimen/_18ssp"
         android:text="@string/insert_descricao" />
 
     <EditText
         android:id="@+id/adicionar_descricao"
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/ColorLightBlack"
+        android:textColorHighlight="@color/header"
+        android:textColorLink="@color/header" />
 
     <Button
         android:id="@+id/button_adicionar_nota"
-        android:layout_width="match_parent"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Adicionar Nota" />
+        android:layout_gravity="center"
+        android:layout_marginTop="250dp"
+        android:backgroundTint="#4f4f57"
+        android:text="@string/adicionar_nota" />
 </LinearLayout>
