@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     fun moverParaMapa(view: View) {
         //val intent = Intent(this, NotasActivity::class.java)
         startActivity(intent)
+        //s
     }
 
 }
