@@ -18,4 +18,10 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    //move to note list activity
+    fun moverParaMapa(view: View) {
+        //val intent = Intent(this, NotasActivity::class.java)
+        startActivity(intent)
+    }
+
 }
