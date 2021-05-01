@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 @Database(entities = arrayOf(Nota::class), version = 8, exportSchema = false)
 public abstract class NotasDB: RoomDatabase(){
 
+    //yes
 
     abstract fun NotasDao(): NotasDao
 

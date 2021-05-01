@@ -78,8 +78,5 @@ class NotasActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-
-
-
 }
 

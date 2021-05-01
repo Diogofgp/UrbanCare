@@ -22,8 +22,7 @@ const val TITLE = "title"
 const val ID = "ID"
 const val DESCRIPTION = "description"
 
-class NotasAdapter internal constructor(context: Context):
-        RecyclerView.Adapter<NotasAdapter.NotasViewHolder>(){
+class NotasAdapter internal constructor(context: Context): RecyclerView.Adapter<NotasAdapter.NotasViewHolder>(){
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var notas = emptyList<Nota>()
@@ -66,7 +65,6 @@ class NotasAdapter internal constructor(context: Context):
         }
 
     }
-
 
     internal fun setNotas(notas: List<Nota>){
         this.notas = notas

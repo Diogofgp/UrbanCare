@@ -50,6 +50,8 @@ class VerNota : AppCompatActivity() {
 
         val btn = findViewById<Button>(R.id.edit_button)
 
+
+        //update informação
         btn.setOnClickListener {
             //go back to previous activity
             val intent = Intent(this, NotasActivity::class.java)
@@ -69,6 +71,8 @@ class VerNota : AppCompatActivity() {
 
         val btnDelete = findViewById<Button>(R.id.delete_button)
 
+
+        //delete notas
         btnDelete.setOnClickListener {
             val intent = Intent(this, NotasActivity::class.java)
             val builder = AlertDialog.Builder(this)
