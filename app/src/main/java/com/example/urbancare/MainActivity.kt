@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+
     //move to note list activity
     fun moverParaNotas(view: View) {
         val intent = Intent(this, NotasActivity::class.java)
