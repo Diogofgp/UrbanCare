@@ -71,6 +71,7 @@
         android:layout_width="158dp"
         android:layout_height="47dp"
         android:layout_marginBottom="30dp"
+        android:onClick="login"
         android:text="Login"
         app:backgroundTint="#4f4f57"
         app:layout_constraintBottom_toTopOf="@+id/consultar_notas"

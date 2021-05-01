@@ -67,9 +67,6 @@ class NotasAdapter internal constructor(context: Context):
 
     }
 
-    fun deleteNota(holder: NotasViewHolder, position: Int){
-
-    }
 
     internal fun setNotas(notas: List<Nota>){
         this.notas = notas
