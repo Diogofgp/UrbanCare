@@ -18,5 +18,5 @@ interface EndPoints {
     fun login(
             @Field("username") username: String?,
             @Field("password") password: String?
-    ): Call<OutputPost>
+    ): Call<OutputLogin>
 }
