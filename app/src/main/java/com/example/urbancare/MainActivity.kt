@@ -29,7 +29,10 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: retrofit2.Call<OutputLogin>, response: retrofit2.Response<OutputLogin>) {
                 if (response.isSuccessful){
                     val c: OutputLogin = response.body()!!
-                    Toast.makeText(this@MainActivity, c.MSG+ "-" + c.status, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, c.MSG, Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(this@MainActivity, NotasActivity::class.java)
+                    startActivity(intent)
                 }
             }
 
@@ -44,12 +47,6 @@ class MainActivity : AppCompatActivity() {
     //move to note list activity
     fun moverParaNotas(view: View) {
         val intent = Intent(this, NotasActivity::class.java)
-        startActivity(intent)
-    }
-
-    //move to note list activity
-    fun moverParaMapa(view: View) {
-        //val intent = Intent(this, NotasActivity::class.java)
         startActivity(intent)
     }
 
