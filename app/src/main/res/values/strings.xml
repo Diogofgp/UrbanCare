@@ -14,4 +14,7 @@
     <string name="toast_preencher_campos" translatable="false">Obrigatório preencher todos os campos!</string>
     <string name="de_certeza" translatable="false">Tem a certeza que pretende eliminar a nota</string>
     <string name="delete_sucesso" translatable="false">Nota eliminada com sucesso!</string>
+    <string name="loginSharedPreferences" translatable="false">Manter sessão iniciada</string>
+    <string name="preference_file_key" translatable="false">Shared preference file</string>
+    <string name="sound" translatable="false">username prefs</string>
 </resources>
