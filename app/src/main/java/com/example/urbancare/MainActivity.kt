@@ -24,12 +24,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key),
-                Context.MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
 
         val guardarUser= sharedPreferences.getString(getString(R.string.sound), "")
 
-        if(guardarUser != null){
+        if(guardarUser != ""){
             val intent = Intent(this@MainActivity, MapaActivity::class.java)
             startActivity(intent)
         }
@@ -39,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         btn_login.setOnClickListener {
             login()
         }
-
     }
 
 
@@ -51,8 +49,8 @@ class MainActivity : AppCompatActivity() {
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.login(username = user.text.toString(), password = pass.text.toString())
 
-        call.enqueue(object : retrofit2.Callback<User> {
-            override fun onResponse(call: retrofit2.Call<User>, response: retrofit2.Response<User>) {
+        call.enqueue(object : retrofit2.Callback<OutputLogin> {
+            override fun onResponse(call: retrofit2.Call<OutputLogin>, response: retrofit2.Response<OutputLogin>) {
                 if (response.isSuccessful){
                     //val c: OutputLogin = response.body()!!
                     //Toast.makeText(this@MainActivity, c.MSG, Toast.LENGTH_SHORT).show()
@@ -62,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                     val sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key),
                             Context.MODE_PRIVATE)
                     with(sharedPreferences.edit()){
-                        putString(getString(R.string.sound), response.body()!!.username)
+                        putString(getString(R.string.sound), user.text.toString())
                         commit()
                     }
 
@@ -72,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: retrofit2.Call<User>, t: Throwable) {
+            override fun onFailure(call: retrofit2.Call<OutputLogin>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
