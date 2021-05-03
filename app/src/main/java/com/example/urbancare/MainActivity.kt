@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val guardarUser= sharedPreferences.getString(getString(R.string.sound), "")
 
         if(guardarUser != ""){
-            val intent = Intent(this@MainActivity, MapaActivity::class.java)
+            val intent = Intent(this@MainActivity, MapsActivity::class.java)
             startActivity(intent)
         }
 
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                     }
 
 
-                    val intent = Intent(this@MainActivity, MapaActivity::class.java)
+                    val intent = Intent(this@MainActivity, MapsActivity::class.java)
                     startActivity(intent)
                 }
             }
