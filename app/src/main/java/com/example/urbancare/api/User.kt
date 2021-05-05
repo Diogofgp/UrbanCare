@@ -5,7 +5,3 @@ data class User(
     val password: String
 )
 
-/*
-data class Situacoes{
-    //val
-}*/

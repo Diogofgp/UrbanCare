@@ -16,4 +16,5 @@
     <string name="de_certeza" translatable="false">Are you sure you want to delete this note?</string>
     <string name="delete_sucesso" translatable="false">Note successfully deleted!</string>
     <string name="loginSharedPreferences" translatable="false">Remember me</string>
+    <string name="reportSituacao" translatable="false">Report Situation</string>
 </resources>
