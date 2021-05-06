@@ -17,4 +17,5 @@
     <string name="delete_sucesso" translatable="false">Note successfully deleted!</string>
     <string name="loginSharedPreferences" translatable="false">Remember me</string>
     <string name="reportSituacao" translatable="false">Report Situation</string>
+    <string name="reportButton" translatable="false">Report</string>
 </resources>

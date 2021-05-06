@@ -17,5 +17,16 @@
     <string name="loginSharedPreferences" translatable="false">Manter sessão iniciada</string>
     <string name="preference_file_key" translatable="false">Shared preference file</string>
     <string name="sound" translatable="false">username prefs</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="id_sharedpref" translatable="false">id</string>
     <string name="reportSituacao" translatable="false">Reportar Situação</string>
+    <string name="reportButton" translatable="false">Reportar</string>
+    <string name="adicionarImagem" translatable="false">Adicionar Imagem</string>
+    <string-array name="type">
+        <item>Acidente</item>
+        <item>ZonaInterdita</item>
+    </string-array>
+    <string name="Acidente" translatable="false">Acidente</string>
+    <string name="inserttitle" translatable="false">inserir titulo</string>
+    <string name="insertdescription" translatable="false">inserir descricao</string>
 </resources>

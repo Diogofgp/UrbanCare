@@ -52,9 +52,6 @@ class MainActivity : AppCompatActivity() {
         call.enqueue(object : retrofit2.Callback<OutputLogin> {
             override fun onResponse(call: retrofit2.Call<OutputLogin>, response: retrofit2.Response<OutputLogin>) {
                 if (response.isSuccessful){
-                    //val c: OutputLogin = response.body()!!
-                    //Toast.makeText(this@MainActivity, c.MSG, Toast.LENGTH_SHORT).show()
-
                     //shared prefs
 
                     val sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key),
@@ -63,7 +60,6 @@ class MainActivity : AppCompatActivity() {
                         putString(getString(R.string.sound), user.text.toString())
                         commit()
                     }
-
 
                     val intent = Intent(this@MainActivity, MapsActivity::class.java)
                     startActivity(intent)

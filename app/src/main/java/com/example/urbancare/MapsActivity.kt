@@ -2,6 +2,7 @@ package com.example.urbancare
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
@@ -10,10 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.location.LocationManagerCompat.isLocationEnabled
+import com.example.urbancare.adapters.REPD
+import com.example.urbancare.adapters.REPT
+import com.example.urbancare.api.Report
 import com.google.android.gms.location.*
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -21,21 +26,27 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
 import java.util.jar.Manifest
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     private lateinit var map: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     lateinit var locationRequest: LocationRequest
+    private val LOCATION_PERMISSION_REQUEST = 1
+    private lateinit var report: List<Report>
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var lastLocation: Location
+    private lateinit var locationCallBack: LocationCallback
+    private  var newWordActivityRequestCode = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -50,17 +61,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             return
         }
 
-        val fabRep = findViewById<FloatingActionButton>(R.id.fab_report)
+        locationCallBack = object : LocationCallback() {
+            override fun onLocationResult(p0: LocationResult) {
+                super.onLocationResult(p0)
+                lastLocation = p0.lastLocation
+                var loc = LatLng(lastLocation.latitude, lastLocation.longitude)
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15.0f))
+                findViewById<TextView>(R.id.coords).setText("Lat: " + loc.latitude + " - Long: " + loc.longitude)
+                Log.d("**** ANDRE", "new location received - " + loc.latitude + " - " + loc.longitude)
+            }
+        }
 
+        val fabRep = findViewById<FloatingActionButton>(R.id.fab_report)
 
         fabRep.setOnClickListener {
             val intent = Intent(this@MapsActivity, AdicionarReport::class.java)
             startActivity(intent)
         }
+
+        createLocationRequest()
     }
-
-    private val LOCATION_PERMISSION_REQUEST = 1
-
 
     private fun getLocationAccess() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -89,8 +109,66 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         getLocationAccess()
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            return
+        } else {
+            map.isMyLocationEnabled = true
+        }
+
+        map.setOnInfoWindowClickListener(this)
+    }
+
+    override fun onInfoWindowClick(marker: Marker) {
+        val intent = Intent(this, VerReport::class.java).apply {
+            putExtra(REPT, marker.title)
+            putExtra(REPD, marker.snippet)
+        }
+        startActivity(intent)
+    }
+
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
+        private const val REQUEST_CHECK_SETTINGS = 2
+    }
+
+    private fun startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    LOCATION_PERMISSION_REQUEST_CODE)
+            return
+        }
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallBack, null)
+    }
+
+    private fun createLocationRequest() {
+        locationRequest = LocationRequest()
+        locationRequest.interval = 10000
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+    }
+
+    override fun onPause() {
+        super.onPause()
+        fusedLocationClient.removeLocationUpdates(locationCallBack)
+        Log.d("**** ANDRE", "onPause - removeLocationUpdates")
+    }
+
+    public override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
+        Log.d("**** ANDRE", "onResume - startLocationUpdates")
+    }
+
+    fun calculateDistance(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Float {
+        val results = FloatArray(1)
+        Location.distanceBetween(lat1, lng1, lat2, lng2, results)
+        // distance in meter
+        return results[0]
     }
 
 
-
 }
+
