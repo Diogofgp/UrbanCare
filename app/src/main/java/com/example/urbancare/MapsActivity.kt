@@ -18,6 +18,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.location.LocationManagerCompat.isLocationEnabled
 import com.example.urbancare.adapters.REPD
 import com.example.urbancare.adapters.REPT
+import com.example.urbancare.api.EndPoints
+import com.example.urbancare.api.OutputReport
 import com.example.urbancare.api.Report
 import com.google.android.gms.location.*
 
@@ -25,10 +27,12 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import ipvc.estg.retrofit.api.ServiceBuilder
 import java.util.*
 import java.util.jar.Manifest
 
@@ -43,6 +47,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
     private lateinit var lastLocation: Location
     private lateinit var locationCallBack: LocationCallback
     private  var newWordActivityRequestCode = 1
+    private lateinit var reports: List<Report>
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +84,35 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
             val intent = Intent(this@MapsActivity, AdicionarReport::class.java)
             startActivity(intent)
         }
+
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getReports()
+        var position : LatLng
+        sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
+        val id = sharedPreferences.getString(getString(R.string.id_sharedpref), "")
+
+
+        call.enqueue(object : retrofit2.Callback<List<Report>> {
+            override fun onResponse(call: retrofit2.Call<List<Report>>, response: retrofit2.Response<List<Report>>) {
+                if(response.isSuccessful){
+                    reports = response.body()!!
+                    for(report in reports){
+                        if(id == report.users_id){
+                            position = LatLng(report.latitude.toString().toDouble(), report.longitude.toString().toDouble())
+                            map.addMarker(MarkerOptions().position(position).title(report.titulo + "---" + report.descricao).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
+                        }else{
+                            position = LatLng(report.latitude.toString().toDouble(), report.longitude.toString().toDouble())
+                            map.addMarker(MarkerOptions().position(position).title(report.titulo + "---" + report.descricao).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)))
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<List<Report>>, t: Throwable) {
+                Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+
 
         createLocationRequest()
     }
@@ -153,13 +188,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
     override fun onPause() {
         super.onPause()
         fusedLocationClient.removeLocationUpdates(locationCallBack)
-        Log.d("**** ANDRE", "onPause - removeLocationUpdates")
     }
 
     public override fun onResume() {
         super.onResume()
         startLocationUpdates()
-        Log.d("**** ANDRE", "onResume - startLocationUpdates")
     }
 
     fun calculateDistance(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Float {

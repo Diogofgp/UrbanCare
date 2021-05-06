@@ -43,7 +43,7 @@ class NotasActivity : AppCompatActivity() {
             notas?.let { adapter.setNotas(it) }
         })
 
-        val fab = findViewById<FloatingActionButton>(R.id.fab_report)
+        val fab = findViewById<FloatingActionButton>(R.id.fab_nota)
         fab.setOnClickListener {
             val intent = Intent(this@NotasActivity, AdicionarNota::class.java)
             startActivityForResult(intent, newNotaActivityRequestCode)

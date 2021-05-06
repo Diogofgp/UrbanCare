@@ -18,4 +18,5 @@
     <string name="loginSharedPreferences" translatable="false">Remember me</string>
     <string name="reportSituacao" translatable="false">Report Situation</string>
     <string name="reportButton" translatable="false">Report</string>
+    <string name="adicionarImagem" translatable="false">Add Image</string>
 </resources>

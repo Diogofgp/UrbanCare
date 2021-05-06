@@ -30,7 +30,10 @@ interface EndPoints {
             @Part("latitude") latitude: RequestBody,
             @Part("longitude") longitude: RequestBody,
             @Part fotografia: MultipartBody.Part,
-            @Part("tipo") tipo: Int,
-            @Part("users_id") users_id: Int
-    ): Call<Report>
+            @Part("tipo") tipo: RequestBody,
+            @Part("users_id") users_id: RequestBody
+    ): Call<OutputReport>
+
+    @GET("api/verReports")
+    fun getReports(): Call<List<Report>>
 }

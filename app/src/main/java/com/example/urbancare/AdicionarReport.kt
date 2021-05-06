@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.example.urbancare.api.EndPoints
+import com.example.urbancare.api.OutputLogin
+import com.example.urbancare.api.OutputReport
 import com.example.urbancare.api.Report
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
@@ -29,22 +31,16 @@ class AdicionarReport : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     private lateinit var image: ImageView
     private lateinit var title: EditText
     private lateinit var description: EditText
-
     private lateinit var location: LatLng
-
     private val newOcorrActivityRequestCode = 1
-
     private lateinit var lastLocation: Location
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
     private val LOCATION_PERMISSION_REQUEST_CODE = 1
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-
     private val pickImage = 100
     private var imageUri: Uri? = null
-
     private lateinit var button: Button
-    private lateinit var buttonBack: Button
     private lateinit var buttonAdd: Button
     private lateinit var spinner: Spinner
     private lateinit var sharedPreferences: SharedPreferences
@@ -71,7 +67,7 @@ class AdicionarReport : AppCompatActivity(), AdapterView.OnItemSelectedListener 
                 Toast.makeText(applicationContext, R.string.toast_preencher_campos, Toast.LENGTH_LONG).show()
             } else {
                 addReport()
-                finish()
+                //finish()
             }
         }
 
@@ -105,39 +101,38 @@ class AdicionarReport : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     private fun startLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this,
                         android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
             ActivityCompat.requestPermissions(this,
                     arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
                     LOCATION_PERMISSION_REQUEST_CODE)
             return
         }
-        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */)
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
     }
 
     fun addReport(){
         sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
-        val users_id: Int = sharedPreferences.getInt(R.string.id_sharedpref.toString(), 0)
+        val users_id: String? = sharedPreferences.getString(getString(R.string.id_sharedpref), "")
 
+        Log.d("ocaralhoquetefoda", users_id!!)
         val imgBitmap: Bitmap = findViewById<ImageView>(R.id.imagemReport).drawable.toBitmap()
         val imageFile: File = convertBitmapToFile("file", imgBitmap)
         val imgFileRequest: RequestBody = RequestBody.create(MediaType.parse("image/*"), imageFile)
-        val fotografia: MultipartBody.Part = MultipartBody.Part.createFormData("image", imageFile.name, imgFileRequest)
+        val fotografia1: MultipartBody.Part = MultipartBody.Part.createFormData("fotografia", imageFile.name, imgFileRequest)
 
-        val title: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), title.text.toString())
-        val description: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), description.text.toString())
-        val tipo: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), spinner.selectedItem.toString())
-        val latitude: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), lastLocation.latitude.toString())
-        val longitude: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), lastLocation.longitude.toString())
+        val title1: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), title.text.toString())
+
+        val description1: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), description.text.toString())
+        val tipo1: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), spinner.selectedItem.toString())
+        val latitude1: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), lastLocation.latitude.toString())
+        val longitude1: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), lastLocation.longitude.toString())
+        val users_id1: RequestBody = RequestBody.create(MediaType.parse("multipart/form-data"), users_id)
 
         val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.addReport(title, description, latitude, longitude, fotografia, spinner.selectedItemPosition + 1, users_id)
+        val call = request.addReport(title1, description1, latitude1, longitude1, fotografia1, tipo1, users_id1)
 
-        call.enqueue(object : retrofit2.Callback<Report> {
-            override fun onResponse(call: retrofit2.Call<Report>, response: retrofit2.Response<Report>) {
-
-                Log.d("fodase esta emrda", response.toString())
+        call.enqueue(object : retrofit2.Callback<OutputReport> {
+            override fun onResponse(call: retrofit2.Call<OutputReport>, response: retrofit2.Response<OutputReport>) {
                 if(response.isSuccessful){
-
                     Toast.makeText(this@AdicionarReport, "inseriu com sucesso", Toast.LENGTH_LONG).show()
 
                     val intent = Intent(this@AdicionarReport, MapsActivity::class.java)
@@ -147,7 +142,7 @@ class AdicionarReport : AppCompatActivity(), AdapterView.OnItemSelectedListener 
                 }
             }
 
-            override fun onFailure(call: retrofit2.Call<Report>, t: Throwable) {
+            override fun onFailure(call: retrofit2.Call<OutputReport>, t: Throwable) {
                 Toast.makeText(this@AdicionarReport, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
@@ -158,10 +153,7 @@ class AdicionarReport : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-        // An item was selected. You can retrieve the selected item using
         parent.getItemAtPosition(pos)
-        Log.d("SPINNER", pos.toString())
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -176,13 +168,11 @@ class AdicionarReport : AppCompatActivity(), AdapterView.OnItemSelectedListener 
     override fun onPause() {
         super.onPause()
         fusedLocationClient.removeLocationUpdates(locationCallback)
-        Log.d(" ANDRE", "onPause - removeLocationUpdates")
     }
 
     public override fun onResume() {
         super.onResume()
         startLocationUpdates()
-        Log.d(" ANDRE", "onResume - startLocationUpdates")
     }
 
     private fun convertBitmapToFile(fileName: String, bitmap: Bitmap): File {
@@ -211,6 +201,4 @@ class AdicionarReport : AppCompatActivity(), AdapterView.OnItemSelectedListener 
         }
         return file
     }
-
-
 }

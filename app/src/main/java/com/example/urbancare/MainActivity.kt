@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
 
-        val guardarUser= sharedPreferences.getString(getString(R.string.sound), "")
+        val guardarUser= sharedPreferences.getString(getString(R.string.id_sharedpref), "")
 
         if(guardarUser != ""){
             val intent = Intent(this@MainActivity, MapsActivity::class.java)
@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     fun login() {
 
         var user = findViewById<EditText>(R.id.inserir_nome)
@@ -53,11 +52,10 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: retrofit2.Call<OutputLogin>, response: retrofit2.Response<OutputLogin>) {
                 if (response.isSuccessful){
                     //shared prefs
-
                     val sharedPreferences = getSharedPreferences(getString(R.string.preference_file_key),
                             Context.MODE_PRIVATE)
                     with(sharedPreferences.edit()){
-                        putString(getString(R.string.sound), user.text.toString())
+                        putString(getString(R.string.id_sharedpref), response.body()!!.id.toString())
                         commit()
                     }
 
@@ -71,8 +69,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
-
 
     //move to note list activity
     fun moverParaNotas(view: View) {
