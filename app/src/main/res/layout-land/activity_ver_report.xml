@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textoTitle"
+                android:layout_width="350dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="60dp"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/titulo_verNotas"
+                android:textColor="@color/ColorLightBlack"
+                android:textColorHighlight="@color/header"
+                android:textColorLink="@color/header"
+                android:textSize="@dimen/_18ssp" />
+
+            <EditText
+                android:id="@+id/receberTitulo"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="44dp"
+                android:textColor="@color/ColorLightBlack"
+                android:textColorHighlight="@color/header"
+                android:textColorLink="@color/header" />
+
+            <TextView
+                android:id="@+id/textoDesc"
+                android:layout_width="350dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="36dp"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/descricao_verNotas"
+                android:textColor="@color/ColorLightBlack"
+                android:textSize="@dimen/_18ssp" />
+
+            <EditText
+                android:id="@+id/receberDesc"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="72dp"
+                android:textColor="@color/ColorLightBlack"
+                android:textColorHighlight="@color/header"
+                android:textColorLink="@color/header" />
+
+            <ImageView
+                android:id="@+id/verFoto"
+                android:layout_width="207dp"
+                android:layout_height="202dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="80dp"
+                tools:srcCompat="@tools:sample/avatars" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

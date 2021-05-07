@@ -9,6 +9,7 @@ import com.example.urbancare.api.EndPoints
 import com.example.urbancare.api.Report
 import com.squareup.picasso.Picasso
 import ipvc.estg.retrofit.api.ServiceBuilder
+import ipvc.estg.retrofit.api.ServiceBuilder.buildService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,7 +29,7 @@ class VerReport : AppCompatActivity() {
         tit = findViewById(R.id.receberTitulo)
         foto = findViewById(R.id.verFoto)
 
-        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val request = buildService(EndPoints::class.java)
         val call = request.getReports()
         call.enqueue(object : Callback<List<Report>> {
             override fun onResponse(call: Call<List<Report>>, response: Response<List<Report>>) {
