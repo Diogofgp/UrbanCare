@@ -37,7 +37,7 @@ class VerReport : AppCompatActivity() {
                     for (report in reports) {
                         desc.setText(report.descricao)
                         tit.setText(report.titulo)
-                        Picasso.with(this@VerReport).load("C:/xampp/htdocs/myslim/fotos/" + report.fotografia + ".png").into(foto)
+                        Picasso.with(this@VerReport).load("http://10.0.2.2/myslim/fotos/" + report.fotografia + ".png").into(foto)
                     }
                 }
             }

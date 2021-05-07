@@ -97,10 +97,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                     for (report in reports) {
                         if (id == report.users_id) {
                             position = LatLng(report.latitude.toString().toDouble(), report.longitude.toString().toDouble())
-                            map.addMarker(MarkerOptions().position(position).title(report.titulo + "---" + report.descricao).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
+                            map.addMarker(MarkerOptions().position(position).title(report.titulo + "|" + report.tipo).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
                         } else {
                             position = LatLng(report.latitude.toString().toDouble(), report.longitude.toString().toDouble())
-                            map.addMarker(MarkerOptions().position(position).title(report.titulo + "---" + report.descricao).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)))
+                            map.addMarker(MarkerOptions().position(position).title(report.titulo + "|" + report.tipo).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)))
                         }
                     }
                 }

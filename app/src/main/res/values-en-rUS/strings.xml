@@ -27,5 +27,5 @@
     <string name="listarTudo" translatable="false">List all reports</string>
     <string name="listarAcidentes" translatable="false">List Accidents</string>
     <string name="listarObras" translatable="false">List Constructions</string>
-    <string name="listarInterditas" translatable="false">No-go Zone</string>
+    <string name="listarInterditas" translatable="false">List No-go Zones</string>
 </resources>
