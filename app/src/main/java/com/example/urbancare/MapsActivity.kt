@@ -254,6 +254,66 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                 })
                 true
             }
+
+            R.id.listarObras -> {
+                map.clear()
+
+                val request = ServiceBuilder.buildService(EndPoints::class.java)
+                val call = request.getReports()
+                var position: LatLng
+                call.enqueue(object : retrofit2.Callback<List<Report>> {
+                    override fun onResponse(call: retrofit2.Call<List<Report>>, response: retrofit2.Response<List<Report>>) {
+                        if (response.isSuccessful) {
+                            report = response.body()!!
+                            for (rep in report) {
+                                if(rep.tipo.toString() == "Obras") {
+                                    position =
+                                        LatLng(rep.latitude.toDouble(), rep.longitude.toDouble())
+                                    map.addMarker(
+                                        MarkerOptions().position(position)
+                                            .title(rep.titulo + " - " + rep.descricao)
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: retrofit2.Call<List<Report>>, t: Throwable) {
+                        Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+                true
+            }
+
+            R.id.listarZonasInterditas -> {
+                map.clear()
+
+                val request = ServiceBuilder.buildService(EndPoints::class.java)
+                val call = request.getReports()
+                var position: LatLng
+                call.enqueue(object : retrofit2.Callback<List<Report>> {
+                    override fun onResponse(call: retrofit2.Call<List<Report>>, response: retrofit2.Response<List<Report>>) {
+                        if (response.isSuccessful) {
+                            report = response.body()!!
+                            for (rep in report) {
+                                if(rep.tipo.toString() == "ZonaInterdita") {
+                                    position =
+                                        LatLng(rep.latitude.toDouble(), rep.longitude.toDouble())
+                                    map.addMarker(
+                                        MarkerOptions().position(position)
+                                            .title(rep.titulo + " - " + rep.descricao)
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: retrofit2.Call<List<Report>>, t: Throwable) {
+                        Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

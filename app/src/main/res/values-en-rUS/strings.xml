@@ -19,4 +19,13 @@
     <string name="reportSituacao" translatable="false">Report Situation</string>
     <string name="reportButton" translatable="false">Report</string>
     <string name="adicionarImagem" translatable="false">Add Image</string>
+    <string name="Acidente" translatable="false">Accident</string>
+    <string name="Obras" translatable="false">Construction</string>
+    <string name="Outro" translatable="false">Other</string>
+    <string name="inserttitle" translatable="false">insert title</string>
+    <string name="insertdescription" translatable="false">insert description</string>
+    <string name="listarTudo" translatable="false">List all reports</string>
+    <string name="listarAcidentes" translatable="false">List Accidents</string>
+    <string name="listarObras" translatable="false">List Constructions</string>
+    <string name="listarInterditas" translatable="false">No-go Zone</string>
 </resources>

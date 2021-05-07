@@ -31,12 +31,14 @@ class MainActivity : AppCompatActivity() {
         if(guardarUser != ""){
             val intent = Intent(this@MainActivity, MapsActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         var btn_login = findViewById<Button>(R.id.login_button)
 
         btn_login.setOnClickListener {
             login()
+            finish()
         }
     }
 
@@ -61,6 +63,7 @@ class MainActivity : AppCompatActivity() {
 
                     val intent = Intent(this@MainActivity, MapsActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
             }
 
