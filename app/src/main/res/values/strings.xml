@@ -32,4 +32,8 @@
     <string name="Outro" translatable="false">Outro</string>
     <string name="inserttitle" translatable="false">inserir titulo</string>
     <string name="insertdescription" translatable="false">inserir descricao</string>
+    <string name="listarTudo" translatable="false">Listar todas os reports</string>
+    <string name="listarAcidentes" translatable="false">Listar Acidentes</string>
+    <string name="listarObras" translatable="false">Listar Obras</string>
+    <string name="listarInterditas" translatable="false">Listar zonas interditas</string>
 </resources>

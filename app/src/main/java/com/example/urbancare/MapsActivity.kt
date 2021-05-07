@@ -19,9 +19,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.location.LocationManagerCompat.isLocationEnabled
-import com.example.urbancare.api.EndPoints
-import com.example.urbancare.api.OutputReport
-import com.example.urbancare.api.Report
+import com.example.urbancare.api.*
 import com.google.android.gms.location.*
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -153,8 +151,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
     override fun onInfoWindowClick(marker: Marker) {
         val intent = Intent(this, VerReport::class.java).apply {
-            //putExtra(REPT, marker.title)
-            //putExtra(REPD, marker.snippet)
+            putExtra(REPT, marker.title)
+            putExtra(REPD, marker.snippet)
         }
         startActivity(intent)
     }
@@ -217,6 +215,43 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                     putString(getString(R.string.id_sharedpref), "")
                     commit()
                 }
+                true
+            }
+
+            R.id.mostrarTudo -> {
+                map.clear()
+                val intent = Intent(this, MapsActivity::class.java)
+                startActivity(intent)
+                true
+            }
+
+            R.id.listarAcidentes -> {
+                map.clear()
+
+                val request = ServiceBuilder.buildService(EndPoints::class.java)
+                val call = request.getReports()
+                var position: LatLng
+                call.enqueue(object : retrofit2.Callback<List<Report>> {
+                    override fun onResponse(call: retrofit2.Call<List<Report>>, response: retrofit2.Response<List<Report>>) {
+                        if (response.isSuccessful) {
+                            report = response.body()!!
+                            for (rep in report) {
+                                if(rep.tipo.toString() == "Acidente") {
+                                    position =
+                                        LatLng(rep.latitude.toDouble(), rep.longitude.toDouble())
+                                    map.addMarker(
+                                        MarkerOptions().position(position)
+                                            .title(rep.titulo + " - " + rep.descricao)
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: retrofit2.Call<List<Report>>, t: Throwable) {
+                        Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -31,6 +31,7 @@
         <activity android:name=".AdicionarReport"/>
         <activity android:name=".VerNota" />
         <activity android:name=".NotasActivity" />
+        <activity android:name=".VerReport"/>
         <activity android:name=".AdicionarNota" />
         <activity android:name=".MainActivity">
             <intent-filter>

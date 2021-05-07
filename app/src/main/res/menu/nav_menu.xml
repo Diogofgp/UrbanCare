@@ -2,6 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/listarZonasInterditas"
+        android:title="@string/listarInterditas" />
+    <item
+        android:id="@+id/listarObras"
+        android:title="@string/listarObras" />
+    <item
+        android:id="@+id/listarAcidentes"
+        android:title="@string/listarAcidentes" />
+    <item
+        android:id="@+id/mostrarTudo"
+        android:title="@string/listarTudo" />
+    <item
         android:id="@+id/logout"
         android:icon="@android:drawable/ic_lock_power_off"
         android:title="Logout" />

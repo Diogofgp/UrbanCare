@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/receberDesc"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="72dp"
+        android:textColor="@color/ColorLightBlack"
+        android:textColorHighlight="@color/header"
+        android:textColorLink="@color/header"
+        app:layout_constraintBottom_toTopOf="@+id/verFoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textoTitle"
+        android:layout_width="350dp"
+        android:layout_height="34dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
+        android:fontFamily="@font/manrope_bold"
+        android:text="@string/titulo_verNotas"
+        android:textColor="@color/ColorLightBlack"
+        android:textColorHighlight="@color/header"
+        android:textColorLink="@color/header"
+        android:textSize="@dimen/_18ssp"
+        app:layout_constraintBottom_toTopOf="@+id/receberTitulo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/receberTitulo"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="44dp"
+        android:textColor="@color/ColorLightBlack"
+        android:textColorHighlight="@color/header"
+        android:textColorLink="@color/header"
+        app:layout_constraintBottom_toTopOf="@+id/textoDesc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textoDesc"
+        android:layout_width="350dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="36dp"
+        android:fontFamily="@font/manrope_bold"
+        android:text="@string/descricao_verNotas"
+        android:textColor="@color/ColorLightBlack"
+        android:textSize="@dimen/_18ssp"
+        app:layout_constraintBottom_toTopOf="@+id/receberDesc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/verFoto"
+        android:layout_width="207dp"
+        android:layout_height="202dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
